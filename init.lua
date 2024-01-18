@@ -74,7 +74,7 @@ require('lazy').setup({
   'tpope/vim-rhubarb',
 
   -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
+  -- 'tpope/vim-sleuth',
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -218,7 +218,15 @@ require('lazy').setup({
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help ibl`
     main = 'ibl',
-    opts = {},
+    opts = {
+     indent = {
+        char = "|",
+      },
+      scope = {
+        enabled = true,
+        highlight = { "Function", "Label" },
+      },
+    },
   },
 
   -- "gc" to comment visual regions/lines
@@ -273,14 +281,31 @@ require('lazy').setup({
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 
+-- Sets the background to transparent
+-- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+-- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+
 -- Set highlight on search
 vim.o.hlsearch = false
+vim.opt.incsearch = true
+
+vim.opt.scrolloff = 8
+
+vim.opt.wrap = false
 
 -- Make line numbers default
 vim.wo.number = true
 
+vim.o.relativenumber = true
+
+vim.opt.colorcolumn = "80"
 -- Enable mouse mode
 vim.o.mouse = 'a'
+
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
 
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -311,6 +336,9 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 -- [[ Basic Keymaps ]]
+
+-- remap control-c to esp in insert mode 
+vim.keymap.set("i", "<C-c>", "<Esc>")
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
